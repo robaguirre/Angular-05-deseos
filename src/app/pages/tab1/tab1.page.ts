@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DeseosService } from '../../services/deseos.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Lista } from '../../models/lista.model';
 
 @Component({
   selector: 'app-tab1',
@@ -33,19 +34,25 @@ export class Tab1Page {
       {
         text: 'Crear',
         handler: (data) => {
-            if (data.titulo.length === 0){
+            if (data.titulo.length === 0) {
               return;
             }
 
             // Crear la lista
-            this.deseosService.crearLista(data.titulo);
+            const listaId = this.deseosService.crearLista(data.titulo);
+
+            // Navego a add item
+            this.router.navigateByUrl(`/tabs/tab1/agregar/${listaId}`);
         }
       }]
     });
 
     alert.present();
+  }
 
-    //this.router.navigateByUrl('/tabs/tab1/agregar');
+  listaSeleciconada(lista: Lista) {
+
+    this.router.navigateByUrl(`/tabs/tab1/agregar/${lista.id}`);
 
   }
 

@@ -11,7 +11,7 @@ import { AlertController, IonList } from '@ionic/angular';
 })
 export class ListasComponent implements OnInit {
 
-  //@ViewChild( IonList ) lista: IonList;
+  @ViewChild( IonList, {static: false} ) lista: IonList;
   @Input() terminada = true;
 
   constructor( public deseosService: DeseosService,
@@ -48,7 +48,7 @@ export class ListasComponent implements OnInit {
           text: 'Cancelar',
           role: 'cancel',
           handler: () => {
-          //  this.lista.closeSlidingItems();
+            this.lista.closeSlidingItems();
           }
         },
         {
@@ -60,7 +60,7 @@ export class ListasComponent implements OnInit {
 
               lista.titulo = data.titulo;
               this.deseosService.guardarStorage();
-             // this.lista.closeSlidingItems();
+              this.lista.closeSlidingItems();
           }
         }]
       });
